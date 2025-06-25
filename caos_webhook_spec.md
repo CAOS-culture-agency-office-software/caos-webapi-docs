@@ -114,8 +114,7 @@ In case of error:
 
 ## 6. 🧪 Test Environment
 
-A secure Web API test interface is available for verified partners.  
-Access details can be requested via: [support@caos-software.de](mailto:support@caos-software.de)
+A secure Web API test interface is available for verified partners.
 
 ### Available Features
 
