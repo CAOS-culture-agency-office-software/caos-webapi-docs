@@ -91,7 +91,7 @@ Event    (1) ───– (1) Venue
 
 - All `uuid_*` fields are internal primary keys.
 - Free-text fields are optional but recommended for completeness.
-- The structure corresponds to the payload described in [caos_webhook_interface_en.md](./caos_webhook_interface_en.md)
+- The structure corresponds to the payload described in [caos_webhook_spec.md](./caos_webhook_spec.md)
 
 ---
 
