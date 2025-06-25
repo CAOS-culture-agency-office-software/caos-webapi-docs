@@ -1,119 +1,139 @@
-# 📘 Schnittstellenbeschreibung: CAOS Webhook zu Künstler-Webseiten
+# 📘 CAOS Webhook Interface
 
-## 1. Zweck der Schnittstelle
-
-Die CAOS-Software sendet alle als „Online“ markierten Spieltermine eines Künstler-Tourplans automatisch per `HTTP POST` an eine oder mehrere konfigurierte Web-APIs (z. B. auf Künstler-Webseiten).
+This document describes the webhook interface of the CAOS software for automatically sending tour events to external web servers (e.g., artist websites).
 
 ---
 
-## 2. Konfiguration
+## 1. Purpose
 
-- Jeder Tourplan (artist_tourdateName) kann eine eigene API-URL (Zieladresse) erhalten.
-- Alternativ können mehrere Tourpläne auf denselben Endpunkt zeigen.
-- CAOS übernimmt die Verwaltung und automatische oder manuelle Auslösung dieser Transfers.
+CAOS transmits all tour dates marked as "Online" via `HTTP POST` to one or more configured API endpoints (usually artist-specific websites or platforms).
 
 ---
 
-## 3. Sicherheit
+## 2. Configuration
 
-- Optional kann ein Schnittstellen-Schlüssel (API-Key) verwendet werden. *(Empfohlen)*
-- Der Schlüssel kann als URL-Parameter oder HTTP-Header übermittelt werden.
+- Each tour plan (calendar) can be linked to its own API endpoint.
+- Alternatively, multiple tour plans can use the same endpoint.
+- CAOS manages the transfer process automatically in the background.
 
-**Beispiel-URL mit API-Key:**
+---
+
+## 3. Security
+
+- An optional **API key** can be added for authentication.
+- The key can be passed via query string or HTTP header.
+
+**Example URL with API key:**
 ```
 https://example.com/api-endpoint?key=YOUR_API_KEY
 ```
 
 ---
 
-## 4. Request: Übertragung per POST
+## 4. Payload Format
 
-CAOS sendet einen JSON-Array mit Spielterminen an die konfigurierte API-URL.
+CAOS sends a `JSON array` containing one or more event objects to the target API.
 
-**HTTP-Methode:** `POST`  
-**Header:**
-```
-Content-Type: application/json
-```
+### 📤 Transmission Options
 
-**Beispielaufruf via curl:**
-```bash
-curl -X POST https://example.com/api-endpoint \
-     -H "Content-Type: application/json" \
-     --data @$json
-```
+#### 🔹 Standard JSON
+
+- Method: `POST`
+- Header:
+  ```
+  Content-Type: application/json
+  ```
+- Body: Raw JSON array
+
+#### 🔹 Base64-encoded JSON (optional)
+
+- Header:
+  ```
+  Content-Type: application/json
+  Content-Transfer-Encoding: base64
+  ```
+- Body: Base64 string representing the JSON content
+
+💡 The receiving server must decode the Base64 string before parsing the JSON.
 
 ---
 
-## 5. Struktur des Payloads
-
-Die JSON-Daten enthalten pro Spieltermin ein Objekt mit u. a. folgenden Feldern:
+### 🔄 Sample JSON Payload (anonymized)
 
 ```json
 {
-  "uuid_artist": "uuid",
-  "artist_name": "Calmus Ensemble",
-  "artist_tourdateName": "Calmus",
-  "uuid_contract": "uuid",
-  "number_contract": "Testvertrag",
-  "uuid_event": "uuid",
-  "date_event": "2025-10-01",
+  "artist_name": "Artist A",
+  "artist_tourdateName": "Tour A",
+  "contract_form_index": 1,
+  "contract_form_text": "public performance (EN)",
+  "date_event": "YYYY-MM-DD",
+  "info_text": "Event description",
+  "notes_event": "Remarks",
+  "number_contract": "XYZ123",
+  "program_name": "Program title",
+  "tickets_advancesale_internet": "https://example.com",
+  "tickets_advancesale_internet_LINK": "Tickets",
+  "tickets_advancesale_phone": "+49-000-000000",
+  "time_doors": "18:00",
   "time_event": "18:30",
-  "program_name": "Programm (nach Absprache)",
-  "venue_name": "Kaisersaal",
-  "venue_city": "Stadt",
-  "venue_country": "Land",
-  "tickets_advancesale_internet": "[Tickets] Internet",
-  "tickets_advancesale_internet_LINK": "Linkbezeichnung",
-  "tickets_advancesale_phone": "",
-  "time_getin": "",
-  "time_rehearsal": "",
-  "time_doors": "",
-  "notes_event": "Notiz 18:30 (Konzert)",
-  "venue_postalcode": "PLZ",
-  "venue_street": "Straße",
-  "venue_geo_lat": "",
-  "venue_geo_lng": "",
-  "venue_homepage": "",
-  "venue_occasion": ""
+  "time_getin": "17:30",
+  "time_rehearsal": "16:15–19:00",
+  "uuid_contract": "uuid-contract",
+  "uuid_artist": "uuid-artist",
+  "uuid_event": "uuid-event",
+  "uuid_product": "uuid-product",
+  "venue_city": "City",
+  "venue_country": "Country",
+  "venue_geo_lat": "52.0000",
+  "venue_geo_lng": "13.0000",
+  "venue_homepage": "https://venue.example.com",
+  "venue_name": "Venue X",
+  "venue_occasion": "Occasion",
+  "venue_postalcode": "12345",
+  "venue_street": "Street 1"
 }
 ```
 
 ---
 
-## 6. Rückgabe / Response
+## 5. API Response
 
-Die Web-API sollte einen JSON-Response senden, z. B.:
+The receiving API should return a JSON response:
 
 ```json
 { "status": "ok" }
 ```
 
-Bei Fehlern:
+In case of error:
 
 ```json
-{ "status": "error", "message": "Ungültiger API-Key" }
+{ "status": "error", "message": "Invalid API key" }
 ```
 
 ---
 
-## 7. API-Simulator (Testumgebung)
+## 6. 🧪 Test Environment
 
-Ein Test-Interface steht zur Verfügung unter:
+A secure Web API test interface is available for verified partners.  
+Access details can be requested via: [support@caos-software.de](mailto:support@caos-software.de)
 
-👉 **https://caos-software-service.de/fmi/webd/CAOS_ADMIN**  
-🔐 Benutzer: `API`  
-🔑 Passwort: `181835`
+### Available Features
 
----
-
-## 8. Hinweise für Webentwickler
-
-✅ JSON-Array empfangen und iterieren  
-✅ Eindeutigkeit der Events via `uuid_event` sicherstellen  
-✅ Optionalen API-Key validieren  
-✅ Aufruf regelmäßig oder asynchron entgegennehmen
+- Set API endpoint URL
+- Optional API key input
+- Buttons for raw JSON or Base64 JSON transmission
+- Editable example payload
+- Visible HTTP response output
 
 ---
 
-© jk-solution - CAOS - culture agency office software | CAOS WebAPI | Stand: 2025-06-25
+## 7. Developer Notes
+
+✅ Accept and process JSON arrays  
+✅ Use `uuid_event` for unique identification  
+✅ Handle authentication if API key is used  
+✅ Support both plain and Base64 transmission
+
+---
+
+© jk-solution • CAOS - culture agency office software • CAOS Web-API • Updated: 2025-06-25

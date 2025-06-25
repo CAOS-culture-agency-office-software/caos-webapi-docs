@@ -1,97 +1,98 @@
-# 📘 Datenmodell: Künstlerbuchung (CAOS)
+# 📘 CAOS Data Model – Event Transmission
 
-Dieses Dokument beschreibt die zugrunde liegenden Entitäten und Datenfelder, die im Rahmen der Webhook-Übertragung durch CAOS an externe API-Endpunkte gesendet werden.
-
----
-
-## 1. 🎭 Artist (Künstler:in)
-
-| Feld                  | Typ     | Beschreibung                                      |
-|-----------------------|----------|---------------------------------------------------|
-| `uuid_artist`         | `uuid`   | Interne eindeutige ID des Künstlers               |
-| `artist_name`         | `string` | Öffentliche Bezeichnung des Künstlers             |
-| `artist_tourdateName` | `string` | Interner Kalendername (Tourplan)                 |
+This document describes the underlying data structure used by the CAOS software to send event data via webhook to external APIs.
 
 ---
 
-## 2. 🎼 Product (Programm)
+## 1. 🎭 Artist
 
-| Feld             | Typ     | Beschreibung                                          |
-|------------------|----------|-------------------------------------------------------|
-| `uuid_product`   | `uuid`   | Eindeutige ID des Programms                          |
-| `program_name`   | `string` | Titel/Bezeichnung des Programms                     |
-
----
-
-## 3. 📄 Contract (Vertrag)
-
-| Feld              | Typ     | Beschreibung                                         |
-|-------------------|----------|------------------------------------------------------|
-| `uuid_contract`   | `uuid`   | Eindeutige ID des Vertrags                          |
-| `number_contract` | `string` | Interne Vertragsnummer                              |
-| `contract_form_index` | `integer` | Index zur Vertragsart-Auswahl (intern)       |
-| `contract_form_text`  | `string`  | Beschreibung der Vertragsart (z. B. öffentlich) |
+| Field                 | Type   | Description                                  |
+|----------------------|--------|----------------------------------------------|
+| `uuid_artist`        | `uuid` | Unique internal ID of the artist             |
+| `artist_name`        | `string` | Public artist name or label                 |
+| `artist_tourdateName`| `string` | Internal tour calendar name                 |
 
 ---
 
-## 4. 🎫 Event (Spieltermin)
+## 2. 🎼 Product (Program)
 
-| Feld            | Typ     | Beschreibung                                  |
-|-----------------|----------|-----------------------------------------------|
-| `uuid_event`    | `uuid`   | Eindeutige ID des Spieltermins               |
-| `date_event`    | `string` | Veranstaltungsdatum (Format: YYYY-MM-DD)     |
-| `time_event`    | `string` | Beginn der Veranstaltung (Format: HH:MM)     |
-| `notes_event`   | `string` | Interne Notizen zum Termin                   |
-| `info_text`     | `string` | Freitext zur Veranstaltung (optional)        |
-| `time_getin`    | `string` | Künstler-Ankunftszeit                         |
-| `time_rehearsal`| `string` | Probenzeit                                   |
-| `time_doors`    | `string` | Einlasszeit des Publikums                    |
+| Field             | Type   | Description                                      |
+|------------------|--------|--------------------------------------------------|
+| `uuid_product`   | `uuid` | Unique ID of the program                         |
+| `program_name`   | `string` | Title/label of the program                      |
 
 ---
 
-## 5. 🏛️ Venue (Veranstaltungsort)
+## 3. 📄 Contract
 
-| Feld              | Typ     | Beschreibung                              |
-|-------------------|----------|-------------------------------------------|
-| `venue_name`      | `string` | Name der Location                         |
-| `venue_street`    | `string` | Straße                                    |
-| `venue_postalcode`| `string` | Postleitzahl                              |
-| `venue_city`      | `string` | Stadt                                     |
-| `venue_country`   | `string` | Land                                      |
-| `venue_geo_lat`   | `string` | Geokoordinate: Breitengrad                |
-| `venue_geo_lng`   | `string` | Geokoordinate: Längengrad                 |
-| `venue_homepage`  | `string` | Website der Location                      |
-| `venue_occasion`  | `string` | Anlass der Veranstaltung                  |
+| Field                 | Type     | Description                                  |
+|----------------------|----------|----------------------------------------------|
+| `uuid_contract`      | `uuid`   | Unique contract ID                           |
+| `number_contract`    | `string` | Internal contract number                     |
+| `contract_form_index`| `integer`| Index for contract type (internal use)       |
+| `contract_form_text` | `string` | Contract type label (e.g. public performance)|
 
 ---
 
-## 6. 🎟️ Ticket-Informationen
+## 4. 🎫 Event
 
-| Feld                              | Typ     | Beschreibung                                  |
-|-----------------------------------|----------|-----------------------------------------------|
-| `tickets_advancesale_internet`     | `string` | URL zur Online-Vorverkaufsstelle             |
-| `tickets_advancesale_internet_LINK`| `string` | Bezeichnung des Links                        |
-| `tickets_advancesale_phone`        | `string` | Telefonnummer der Vorverkaufsstelle          |
+| Field             | Type     | Description                             |
+|------------------|----------|-----------------------------------------|
+| `uuid_event`     | `uuid`   | Unique ID of the event                  |
+| `date_event`     | `string` | Event date (format: YYYY-MM-DD)         |
+| `time_event`     | `string` | Event start time (format: HH:MM)        |
+| `notes_event`    | `string` | Internal notes                          |
+| `info_text`      | `string` | Public description (optional)           |
+| `time_getin`     | `string` | Artist arrival time                     |
+| `time_rehearsal` | `string` | Rehearsal time                          |
+| `time_doors`     | `string` | Doors open time                         |
 
 ---
 
-## 🔗 Beziehungen (Kardinalitäten)
+## 5. 🏛️ Venue
+
+| Field              | Type     | Description                         |
+|-------------------|----------|-------------------------------------|
+| `venue_name`      | `string` | Name of the venue                   |
+| `venue_street`    | `string` | Street                              |
+| `venue_postalcode`| `string` | Postal code                         |
+| `venue_city`      | `string` | City                                |
+| `venue_country`   | `string` | Country                             |
+| `venue_geo_lat`   | `string` | Latitude                            |
+| `venue_geo_lng`   | `string` | Longitude                           |
+| `venue_homepage`  | `string` | Website of the venue                |
+| `venue_occasion`  | `string` | Occasion of the event               |
+
+---
+
+## 6. 🎟️ Ticket Info
+
+| Field                               | Type     | Description                                 |
+|------------------------------------|----------|---------------------------------------------|
+| `tickets_advancesale_internet`     | `string` | URL for online ticket sales                |
+| `tickets_advancesale_internet_LINK`| `string` | Link label or button text                  |
+| `tickets_advancesale_phone`        | `string` | Phone number for ticket hotline            |
+
+---
+
+## 🔗 Relationships (Cardinality)
 
 ```text
 Artist   (1) ───< (n) Product
 Artist   (1) ───< (n) Contract
 Product  (1) ───< (n) Contract
 Contract (1) ───< (n) Event
+Event    (1) ───– (1) Venue
 ```
 
 ---
 
-## 💡 Hinweise
+## 💡 Notes
 
-- Alle `uuid_*` Felder sind interne Primärschlüssel zur eindeutigen Identifikation.
-- Felder mit Freitext sind optional, sollten aber konsistent verwendet werden.
-- Die Feldstruktur entspricht der Payload der Webhook-Schnittstelle (siehe: [caos_webhook_interface.md](./caos_webhook_interface.md)).
+- All `uuid_*` fields are internal primary keys.
+- Free-text fields are optional but recommended for completeness.
+- The structure corresponds to the payload described in [caos_webhook_interface_en.md](./caos_webhook_interface_en.md)
 
 ---
 
-© jk-solution | CAOS Datenmodell | Stand: 2025-06-25
+© jk-solution • CAOS - culture agency office software • CAOS Data Model • Updated: 2025-06-25
