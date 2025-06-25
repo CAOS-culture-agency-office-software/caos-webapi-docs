@@ -1,6 +1,6 @@
 # 📘 CAOS WebAPI Documentation
 
-This repository contains the full documentation of the Webhook interface of the **CAOS Software** (Culture Agency Office Software).
+This repository contains the full documentation of the Webhook interface of the **CAOS - culture agency office software**.
 
 ---
 
@@ -38,18 +38,15 @@ This documentation is intended for:
 
 ## 🧪 Test Environment
 
-A public Web API test center is available at:
-
-👉 [https://caos-software-service.de/fmi/webd/CAOS_ADMIN](https://caos-software-service.de/fmi/webd/CAOS_ADMIN)  
-👤 User: `API`  
-🔑 Password: `181835`
+A secure Web API test interface is available for verified partners.  
+Access details can be requested via: [support@caos-software.de](mailto:support@caos-software.de)
 
 ---
 
 ## ⚙️ License
 
-This repository is intended for documentation only and is currently **not open source**. Usage by request via [jk-solution.de](https://www.jk-solution.de)
+This repository is intended for documentation only and is currently **not open source**. Usage by request via [CAOS - culture agency office software](https://www.caos-software.de)
 
 ---
 
-© jk-solution • CAOS WebAPI • Updated: 2025-06-25
+© jk-solution | CAOS - culture agency office software • CAOS WebAPI • Updated: 2025-06-25
