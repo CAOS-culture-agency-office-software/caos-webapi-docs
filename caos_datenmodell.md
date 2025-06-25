@@ -46,6 +46,12 @@ This document describes the underlying data structure used by the CAOS software 
 | `time_getin`     | `string` | Artist arrival time                     |
 | `time_rehearsal` | `string` | Rehearsal time                          |
 | `time_doors`     | `string` | Doors open time                         |
+| `time_catering`    | `string` | Scheduled catering time                                   |
+| `time_curfew`      | `string` | Curfew: music off, lights out, and teardown              |
+| `time_pause`       | `string` | Performance breaks or intermissions                      |
+| `time_photosession`| `string` | Scheduled photo session                                   |
+| `time_showende`    | `string` | End of the show                                           |
+
 
 ---
 
@@ -72,6 +78,7 @@ This document describes the underlying data structure used by the CAOS software 
 | `tickets_advancesale_internet`     | `string` | URL for online ticket sales                |
 | `tickets_advancesale_internet_LINK`| `string` | Link label or button text                  |
 | `tickets_advancesale_phone`        | `string` | Phone number for ticket hotline            |
+| `presale_link`                     | `string` | Ticket presale link for each event date within a contract |
 
 ---
 
