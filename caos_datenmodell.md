@@ -39,7 +39,7 @@ This document describes the underlying data structure used by the CAOS software 
 | Field                         | Type     | Description                             |
 |-------------------------------|----------|-----------------------------------------|
 | `uuid_event`                  | `uuid`  | Unique ID of the event                  |
-| `date_event`                  | `string`| Event date (format: YYYY-MM-DD)         |
+| `date_event`                  | `string`| Event date (format: DD.MM.YYYY)         |
 | `time_event`                  | `string`| Event start time (format: HH:MM)        |
 | `notes_event`                 | `string`| Internal notes                          |
 | `info_text`                   | `string`| Public description (optional)           |
@@ -90,7 +90,7 @@ This document describes the underlying data structure used by the CAOS software 
 |------------------------------------|----------|---------------------------------------------|
 | `tickets_advancesale_internet_date_event` | `string` | Online ticket sale URL specific to this event date |
 | `tickets_advancesale_phone_date_event`    | `string` | Phone number for ticket sale specific to this event date |
-| `tickets_advancesale_start_date_event`    | `string` | Start date of ticket sale for this event date (format: YYYY-MM-DD) |
+| `tickets_advancesale_start_date_event`    | `string` | Start date of ticket sale for this event date (format: DD.MM.YYYY) |
 
 💡 If an event-specific field is provided, it overrides the corresponding contract-level information for this particular event.
 
