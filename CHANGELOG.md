@@ -14,7 +14,6 @@ This project follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) an
   - `time_pause`
   - `time_photosession`
   - `time_showende`
-  - `presale_link`
 - Field table updated accordingly in webhook specification
 - JSON example extended with new fields
 
