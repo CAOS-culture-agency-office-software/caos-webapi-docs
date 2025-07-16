@@ -36,22 +36,22 @@ This document describes the underlying data structure used by the CAOS software 
 
 ## 4. 🎫 Event
 
-| Field             | Type     | Description                             |
-|------------------|----------|-----------------------------------------|
-| `uuid_event`     | `uuid`   | Unique ID of the event                  |
-| `date_event`     | `string` | Event date (format: YYYY-MM-DD)         |
-| `time_event`     | `string` | Event start time (format: HH:MM)        |
-| `notes_event`    | `string` | Internal notes                          |
-| `info_text`      | `string` | Public description (optional)           |
-| `time_getin`     | `string` | Artist arrival time                     |
-| `time_rehearsal` | `string` | Rehearsal time                          |
-| `time_doors`     | `string` | Doors open time                         |
-| `time_catering`    | `string` | Scheduled catering time                                   |
-| `time_curfew`      | `string` | Curfew: music off, lights out, and teardown              |
-| `time_pause`       | `string` | Performance breaks or intermissions                      |
-| `time_photosession`| `string` | Scheduled photo session                                   |
-| `time_showende`    | `string` | End of the show                                           |
-
+| Field                         | Type     | Description                             |
+|-------------------------------|----------|-----------------------------------------|
+| `uuid_event`                  | `uuid`  | Unique ID of the event                  |
+| `date_event`                  | `string`| Event date (format: YYYY-MM-DD)         |
+| `time_event`                  | `string`| Event start time (format: HH:MM)        |
+| `notes_event`                 | `string`| Internal notes                          |
+| `info_text`                   | `string`| Public description (optional)           |
+| `info_text_date_event`        | `string`| Additional description for this event date |
+| `time_getin`                  | `string`| Artist arrival time                     |
+| `time_rehearsal`              | `string`| Rehearsal time                          |
+| `time_doors`                  | `string`| Doors open time                         |
+| `time_catering`               | `string`| Scheduled catering time                 |
+| `time_curfew`                 | `string`| Curfew: music off, lights out, and teardown |
+| `time_pause`                  | `string`| Performance breaks or intermissions     |
+| `time_photosession`           | `string`| Scheduled photo session                 |
+| `time_showende`               | `string`| End of the show                         |
 
 ---
 
@@ -68,17 +68,31 @@ This document describes the underlying data structure used by the CAOS software 
 | `venue_geo_lng`   | `string` | Longitude                           |
 | `venue_homepage`  | `string` | Website of the venue                |
 | `venue_occasion`  | `string` | Occasion of the event               |
+| `venue_name_date_event` | `string` | Specific venue name for this event date |
 
 ---
 
 ## 6. 🎟️ Ticket Info
 
+### Contract-related ticket info (applies to the whole contract)
+
 | Field                               | Type     | Description                                 |
 |------------------------------------|----------|---------------------------------------------|
-| `tickets_advancesale_internet`     | `string` | URL for online ticket sales                |
-| `tickets_advancesale_internet_LINK`| `string` | Link label or button text                  |
-| `tickets_advancesale_phone`        | `string` | Phone number for ticket hotline            |
-| `presale_link`                     | `string` | Ticket presale link for each event date within a contract |
+| `tickets_advancesale_internet`     | `string` | URL for online ticket sales, applies to all events of the contract |
+| `tickets_advancesale_internet_LINK`| `string` | Link label or button text, applies to all events of the contract |
+| `tickets_advancesale_phone`        | `string` | Phone number for ticket hotline, applies to all events of the contract |
+
+---
+
+### Event-related ticket info (specific to each event date)
+
+| Field                               | Type     | Description                                 |
+|------------------------------------|----------|---------------------------------------------|
+| `tickets_advancesale_internet_date_event` | `string` | Online ticket sale URL specific to this event date |
+| `tickets_advancesale_phone_date_event`    | `string` | Phone number for ticket sale specific to this event date |
+| `tickets_advancesale_start_date_event`    | `string` | Start date of ticket sale for this event date (format: YYYY-MM-DD) |
+
+💡 If an event-specific field is provided, it overrides the corresponding contract-level information for this particular event.
 
 ---
 
@@ -102,4 +116,4 @@ Event    (1) ───– (1) Venue
 
 ---
 
-© jk-solution • CAOS - culture agency office software • CAOS Data Model • Updated: 2025-06-25
+© jk-solution • CAOS - culture agency office software • CAOS Data Model • Updated: 2025-07-16
