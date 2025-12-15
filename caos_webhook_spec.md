@@ -60,6 +60,25 @@ CAOS sends a `JSON array` containing one or more event objects to the target API
 
 ### 🔄 Sample JSON Payload (anonymized)
 
+The JSON payload consists of an array of objects.
+Each object represents a single event (e.g., tour date) with all associated information such as artist, program, contract details, time specifications, venue, and publication status.
+
+**Structure:**
+```json
+{
+  "artists_Tourdates": [
+    {
+      // Event 1 (e.g., tour date)
+    },
+    {
+      // Event 2
+    },
+    ...
+  ]
+}
+```
+
+**Example of a single event object:**
 ```json
 {
   "artist_name": "Artist A",
