@@ -116,4 +116,4 @@ Event    (1) ───– (1) Venue
 
 ---
 
-© jk-solution • CAOS - culture agency office software • CAOS Data Model • Updated: 2025-12-15
+© jk-solution • CAOS - culture agency office software • CAOS Data Model • Updated: 2025-07-16

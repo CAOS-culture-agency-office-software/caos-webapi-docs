@@ -164,4 +164,4 @@ A secure Web API test interface is available for verified partners.
 
 ---
 
-© jk-solution • CAOS - culture agency office software • CAOS Web-API • Updated: 2025-06-25
+© jk-solution • CAOS - culture agency office software • CAOS Web-API • Updated: 2025-12-15
